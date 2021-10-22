@@ -81,16 +81,20 @@ display:
           }
           else {
             float value = id(temp_sensor).state;
-            char* dangerLevel;
-            if (value > 40) { dangerLevel = "(!!!)"; }
-            else if (value > 35) { dangerLevel = "(!!)"; }
-            else if (value > 30) { dangerLevel = "(!)"; }
-            else if (value < 5) { dangerLevel = "(!!!)"; }
-            else if (value < 10) { dangerLevel = "(!!)"; }
-            else if (value < 15) { dangerLevel = "(!)"; }
-            else { dangerLevel = ""; }
+
+            char* dangerLevel = (char*)malloc(sizeof(char) * 6);
+            if (value > 40) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value > 35) { strcpy(dangerLevel, "(!!)"); }
+            else if (value > 30) { strcpy(dangerLevel, "(!)"); }
+            else if (value < 5) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value < 10) { strcpy(dangerLevel, "(!!)"); }
+            else if (value < 15) { strcpy(dangerLevel, "(!)"); }
+            else { strcpy(dangerLevel, ""); }
+
             it.printf(0, 20, id(my_font), "%.1f°C %s", value, dangerLevel);
-            it.graph(0, 44, id(temp_graph));
+            it.graph(0, 40, id(temp_graph));
+
+            free(dangerLevel);
           }
       - id: humidity_page
         lambda: |-
@@ -100,16 +104,20 @@ display:
           }
           else {
             float value = id(humidity_sensor).state;
-            char* dangerLevel;
-            if (value > 70) { dangerLevel = "(!!!)"; }
-            else if (value > 65) { dangerLevel = "(!!)"; }
-            else if (value > 60) { dangerLevel = "(!)"; }
-            else if (value < 20) { dangerLevel = "(!!!)"; }
-            else if (value < 25) { dangerLevel = "(!!)"; }
-            else if (value < 30) { dangerLevel = "(!)"; }
-            else { dangerLevel = ""; }
+
+            char* dangerLevel = (char*)malloc(sizeof(char) * 6);
+            if (value > 70) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value > 65) { strcpy(dangerLevel, "(!!)"); }
+            else if (value > 60) { strcpy(dangerLevel, "(!)"); }
+            else if (value < 20) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value < 25) { strcpy(dangerLevel, "(!!)"); }
+            else if (value < 30) { strcpy(dangerLevel, "(!)"); }
+            else { strcpy(dangerLevel, ""); }
+
             it.printf(0, 20, id(my_font), "%.1f%% %s", value, dangerLevel);
-            it.graph(0, 44, id(humidity_graph));
+            it.graph(0, 40, id(humidity_graph));
+
+            free(dangerLevel);
           }
       - id: pressure_page
         lambda: |-
@@ -119,7 +127,7 @@ display:
           }
           else {
             it.printf(0, 20, id(my_font), "%.1f hPa", id(pressure_sensor).state);
-            it.graph(0, 44, id(pressure_graph));
+            it.graph(0, 40, id(pressure_graph));
           }
       - id: co2_page
         lambda: |-
@@ -129,13 +137,17 @@ display:
           }
           else {
             float value = id(co2_sensor).state;
-            char* dangerLevel;
-            if (value > 2000) { dangerLevel = "(!!!)"; }
-            else if (value > 1000) { dangerLevel = "(!!)"; }
-            else if (value > 800) { dangerLevel = "(!)"; }
-            else { dangerLevel = ""; }
+
+            char* dangerLevel = (char*)malloc(sizeof(char) * 6);
+            if (value > 2000) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value > 1000) { strcpy(dangerLevel, "(!!)"); }
+            else if (value > 800) { strcpy(dangerLevel, "(!)"); }
+            else { strcpy(dangerLevel, ""); }
+
             it.printf(0, 20, id(my_font), "%.0f ppm %s", value, dangerLevel);
-            it.graph(0, 44, id(co2_graph));
+            it.graph(0, 40, id(co2_graph));
+
+            free(dangerLevel);
           }
       - id: part_matter_1um_page
         lambda: |-
@@ -144,8 +156,18 @@ display:
             it.print(0, 20, id(my_font), "Gathering data...");
           }
           else {
-            it.printf(0, 20, id(my_font), "%.2f µg/m³", id(PM_1_0).state);
-            it.printf(0, 40, id(my_font), "%.2f #/m³", id(PMC_1_0).state);
+            float value = id(PM_1_0).state;
+
+            char* dangerLevel = (char*)malloc(sizeof(char) * 6);
+            if (value > 55.5) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value > 35.5) { strcpy(dangerLevel, "(!!)"); }
+            else if (value > 12.1) { strcpy(dangerLevel, "(!)"); }
+            else { strcpy(dangerLevel, ""); }
+
+            it.printf(0, 20, id(my_font), "%.2f µg/m³ %s", value, dangerLevel);
+            it.graph(0, 40, id(pm_1_0_graph));
+
+            free(dangerLevel);
           }
       - id: part_matter_2_5um_page
         lambda: |-
@@ -154,8 +176,18 @@ display:
             it.print(0, 20, id(my_font), "Gathering data...");
           }
           else {
-            it.printf(0, 20, id(my_font), "%.2f µg/m³", id(PM_2_5).state);
-            it.printf(0, 40, id(my_font), "%.2f #/m³", id(PMC_2_5).state);
+            float value = id(PM_2_5).state;
+
+            char* dangerLevel = (char*)malloc(sizeof(char) * 6);
+            if (value > 55.5) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value > 35.5) { strcpy(dangerLevel, "(!!)"); }
+            else if (value > 12.1) { strcpy(dangerLevel, "(!)"); }
+            else { strcpy(dangerLevel, ""); }
+
+            it.printf(0, 20, id(my_font), "%.2f µg/m³ %s", value, dangerLevel);
+            it.graph(0, 40, id(pm_2_5_graph));
+
+            free(dangerLevel);
           }
       - id: part_matter_5um_page
         lambda: |-
@@ -164,8 +196,18 @@ display:
             it.print(0, 20, id(my_font), "Gathering data...");
           }
           else {
-            it.printf(0, 20, id(my_font), "%.2f µg/m³", id(PM_4_0).state);
-            it.printf(0, 40, id(my_font), "%.2f #/m³", id(PMC_4_0).state);
+            float value = id(PM_4_0).state;
+
+            char* dangerLevel = (char*)malloc(sizeof(char) * 6);
+            if (value > 55.5) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value > 35.5) { strcpy(dangerLevel, "(!!)"); }
+            else if (value > 12.1) { strcpy(dangerLevel, "(!)"); }
+            else { strcpy(dangerLevel, ""); }
+
+            it.printf(0, 20, id(my_font), "%.2f µg/m³ %s", value, dangerLevel);
+            it.graph(0, 40, id(pm_4_0_graph));
+
+            free(dangerLevel);
           }
       - id: part_matter_10um_page
         lambda: |-
@@ -174,31 +216,69 @@ display:
             it.print(0, 20, id(my_font), "Gathering data...");
           }
           else {
-            it.printf(0, 20, id(my_font), "%.2f µg/m³", id(PM_10_0).state);
-            it.printf(0, 40, id(my_font), "%.2f #/m³", id(PMC_10_0).state);
+            float value = id(PM_10_0).state;
+
+            char* dangerLevel = (char*)malloc(sizeof(char) * 6);
+            if (value > 55.5) { strcpy(dangerLevel, "(!!!)"); }
+            else if (value > 35.5) { strcpy(dangerLevel, "(!!)"); }
+            else if (value > 12.1) { strcpy(dangerLevel, "(!)"); }
+            else { strcpy(dangerLevel, ""); }
+
+            it.printf(0, 20, id(my_font), "%.2f µg/m³ %s", value, dangerLevel);
+            it.graph(0, 40, id(pm_10_0_graph));
+
+            free(dangerLevel);
           }
 
 graph:
   - id: temp_graph
     sensor: temp_sensor
-    duration: 1h
+    duration: 30min
     width: 128
-    height: 20
+    height: 24
+    border: false
   - id: humidity_graph
     sensor: humidity_sensor
-    duration: 1h
+    duration: 30min
     width: 128
-    height: 20
+    height: 24
+    border: false
   - id: pressure_graph
     sensor: pressure_sensor
-    duration: 1h
+    duration: 30min
     width: 128
-    height: 20
+    height: 24
+    border: false
   - id: co2_graph
     sensor: co2_sensor
-    duration: 1h
+    duration: 30min
     width: 128
-    height: 20
+    height: 24
+    border: false
+  - id: pm_1_0_graph
+    sensor: PM_1_0
+    duration: 30min
+    width: 128
+    height: 24
+    border: false
+  - id: pm_2_5_graph
+    sensor: PM_2_5
+    duration: 30min
+    width: 128
+    height: 24
+    border: false
+  - id: pm_4_0_graph
+    sensor: PM_4_0
+    duration: 30min
+    width: 128
+    height: 24
+    border: false
+  - id: pm_10_0_graph
+    sensor: PM_10_0
+    duration: 30min
+    width: 128
+    height: 24
+    border: false
 
 interval:
   - interval: 5s
@@ -223,7 +303,7 @@ sensor:
       name: "Gas Resistance"
     i2c_id: primary_i2c_bus
     address: 0x77
-    update_interval: 5min
+    update_interval: 1min
 
   - platform: sps30
     pm_1_0:
@@ -255,12 +335,12 @@ sensor:
       id: "PMC_10_0"
     i2c_id: primary_i2c_bus
     address: 0x69
-    update_interval: 5min
+    update_interval: 1min
 
   - platform: mhz19
     co2:
       name: "CO2 Value"
       id: co2_sensor
-    update_interval: 5min
+    update_interval: 1min
     automatic_baseline_calibration: true
     uart_id: mhz19b_serial
