@@ -1,7 +1,9 @@
+# Import more components
 external_components:
   - source: github://monorkin/esphome_st7565@main
     components: [ st7565 ]
 
+# Project configuration
 esphome:
   name: air-quality-box
   platform: ESP8266
@@ -13,55 +15,64 @@ logger:
 
 # Enable Home Assistant API
 api:
-  password: "password"
+  password: !secret api_password
 
 ota:
-  password: "password"
+  password: !secret ota_password
 
 wifi:
-  ssid: "foo"
-  password: "bar"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Air-Quality-Box Fallback Hotspot"
-    password: "foobar"
+    password: !secret ap_password
 
 captive_portal:
 
 # Configure I2C busses
 i2c:
-  sda: D1
-  scl: D2
-  scan: true
-  id: primary_bus
+  - sda: D1
+    scl: D2
+    scan: true
+    id: primary_i2c_bus
 
-# Configure serial line for MH-Z19B
+# Configure serial lines
 uart:
-  rx_pin: D3
-  tx_pin: D4
-  baud_rate: 9600
-  id: mhz19b_serial
+  - rx_pin: D3
+    tx_pin: D4
+    baud_rate: 9600
+    id: mhz19b_serial
 
+# Configure SPI busses
 spi:
-  clk_pin: D5
-  mosi_pin: D6
+  - clk_pin: D5
+    mosi_pin: D6
+    id: primary_spi_bus
 
+# Import fonts
 font:
   - file: "fonts/Roboto-Regular.ttf"
     id: my_font
-    size: 20
+    size: 15
 
+# Setup displays
 display:
   - platform: st7565
+    spi_id: primary_spi_bus
     width: 128
     height: 64
     dc_pin:
       number: D8
     cs_pin:
       number: D7
+    reset_pin:
+      number: D0
+    # rotation: 180
     lambda: |-
-      it.print(0, 0, id(my_font), "Hello World!");
+      it.print(0, 0, id(my_font), "ST7565");
+      it.print(0, 20, id(my_font), "On ESPHome!");
 
 # Configure sensors
 sensor:
@@ -75,8 +86,10 @@ sensor:
       name: "Humidity"
     gas_resistance:
       name: "Gas Resistance"
+    i2c_id: primary_i2c_bus
     address: 0x77
     update_interval: 60s
+
   - platform: sps30
     pm_1_0:
       name: "Particulate Matter <1µm Weight concentration"
@@ -105,14 +118,16 @@ sensor:
     pmc_10_0:
       name: "Particulate Matter <10µm Number concentration"
       id: "PMC_10_0"
+    i2c_id: primary_i2c_bus
     address: 0x69
-    update_interval: 60s
+    update_interval: 120s
+
   - platform: mhz19
     co2:
       name: "CO2 Value"
     temperature:
       name: "CO2 Temperature"
       internal: true
-    update_interval: 60s
-    automatic_baseline_calibration: false
+    update_interval: 180s
+    automatic_baseline_calibration: true
     uart_id: mhz19b_serial
