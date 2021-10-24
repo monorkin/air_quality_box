@@ -33,8 +33,8 @@ captive_portal:
 
 # Configure I2C busses
 i2c:
-  - sda: D1
-    scl: D2
+  - sda: D2
+    scl: D1
     scan: true
     id: primary_i2c_bus
 
