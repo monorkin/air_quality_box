@@ -77,7 +77,7 @@ they can be the same as the numbers of smaller particles (up to the 2nd decimal)
 
 If you are concerned about your sensor not working correctly, check the device
 logs using `esphome logs ./air_quality_box.yaml` to see all 6 decimal places for
-each measurement. They should be different after somewhere after the 2nd decimal
+each measurement. They should be different somewhere after the 2nd decimal
 place. And give the device some time to settle-in, about 1 to 3h should be
 enough.
 
