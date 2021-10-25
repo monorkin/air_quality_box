@@ -27,6 +27,17 @@ The process will show you a percentage progress indicator, once it reaches
 display you all logs form the device. You can just `Ctrl`+`C` out of the
 process at that point and un-plug the device.
 
+## Updating the firmware
+
+To update the firmware you just have to run `esphome run ./air_quality_box.yaml`
+again.
+
+If your device is connected to the same WiFi as your computer then you can
+choose `Wifi`, or `OTA`, or `air-quality-box.local` from the prompt.
+
+If the device isn't connected to you WiFi then you will have to connect it via
+USB.
+
 ## Troubleshooting
 
 ### SPS30 (particle/dust sensor) reading abnormally high values
@@ -52,12 +63,35 @@ sketch. In it you can trigger auto-cleaning and change the auto-clean interval -
 read the comments in the sketch, they will guide you through everything you need
 do or set (remember to switch to I2C communication!).
 
-### MH-Z19B (CO₂ sensor) reading abnormally high values
+### SPS30 (particle/dust sensor) reading the same value for all or some particle size ranges
+
+This is somewhat normal depending on the relative humidity of your room.
+
+All cheap, laser-based, particle sensors face this problem in high-humidity
+environments.
+
+The particle/dust in the air absorb some of the humidity, or the humidity can
+condense on the particles, which makes them look larger to the sensor.
+
+This artificially inflates the numbers of larger particles to the point that
+they can be the same as the numbers of smaller particles (up to the 2nd decimal
+point).
+
+If you are concerned about your sensor not working correctly, check the device
+logs using `esphome logs ./air_quality_box.yaml` to see all 6 decimal places for
+each measurement. And give the device some time to settle-in, about 1 to 3h
+should be enough.
+
+### MH-Z19B (CO₂ sensor) reading abnormally high or low values
 
 Initial high readings are normal for this sensor. It will need about 1 to 3h so
 settle in and auto-calibrate itself.
 
 Just be patient.
+
+### MH-Z19B (CO₂ sensor) flat-lines at 400ppm
+
+That's a limitation of the sensor. It can't measure anything below 400ppm CO₂.
 
 ### The device doesn't show up in Home Assistant
 
