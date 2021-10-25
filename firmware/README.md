@@ -65,7 +65,9 @@ do or set (remember to switch to I2C communication!).
 
 ### SPS30 (particle/dust sensor) reading the same value for all or some particle size ranges
 
-This is somewhat normal depending on the relative humidity of your room.
+First, give the device some time to settle in. About 1 to 3h should be enough.
+
+Second, this is somewhat normal depending on the relative humidity of your room.
 
 All cheap, laser-based, particle sensors face this problem in high-humidity
 environments. The particles/dust in the air absorb some of the humidity, or the
@@ -78,8 +80,7 @@ they can be the same as the numbers of smaller particles (up to the 2nd decimal)
 If you are concerned about your sensor not working correctly, check the device
 logs using `esphome logs ./air_quality_box.yaml` to see all 6 decimal places for
 each measurement. They should be different somewhere after the 2nd decimal
-place. And give the device some time to settle-in, about 1 to 3h should be
-enough.
+place.
 
 Note that all values after the 2nd decimal place in a reading are mostly noise
 and are therefore discarded.
