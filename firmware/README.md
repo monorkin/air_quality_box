@@ -68,19 +68,21 @@ do or set (remember to switch to I2C communication!).
 This is somewhat normal depending on the relative humidity of your room.
 
 All cheap, laser-based, particle sensors face this problem in high-humidity
-environments.
-
-The particle/dust in the air absorb some of the humidity, or the humidity can
-condense on the particles, which makes them look larger to the sensor.
+environments. The particles/dust in the air absorb some of the humidity, or the
+humidity can condense on the particles, which makes them look simultaneously
+the correct size and larger to the sensor as they scatter and diffract light.
 
 This artificially inflates the numbers of larger particles to the point that
-they can be the same as the numbers of smaller particles (up to the 2nd decimal
-point).
+they can be the same as the numbers of smaller particles (up to the 2nd decimal).
 
 If you are concerned about your sensor not working correctly, check the device
 logs using `esphome logs ./air_quality_box.yaml` to see all 6 decimal places for
-each measurement. And give the device some time to settle-in, about 1 to 3h
-should be enough.
+each measurement. They should be different after somewhere after the 2nd decimal
+place. And give the device some time to settle-in, about 1 to 3h should be
+enough.
+
+Note that all values after the 2nd decimal place in a reading are mostly noise
+and are therefore discarded.
 
 ### MH-Z19B (CO₂ sensor) reading abnormally high or low values
 
