@@ -1,5 +1,12 @@
 # Firmware
 
+The firmware is a program that drives all sensors, connects to your WiFi
+network, does OTA updates, and interacts with Home Assistant.
+
+It's a single piece of software that controls all the device does.
+
+## Building & flashing the firmware
+
 The firmware is built and flashed using the
 [`esphome` tool](https://esphome.io/guides/getting_started_command_line.html).
 
