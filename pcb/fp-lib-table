@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name air_quality_box)(type KiCad)(uri ${KIPRJMOD}/air_quality_box.pretty)(options "")(descr ""))
+)

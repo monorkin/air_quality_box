@@ -9,6 +9,7 @@
 
 # PCB backup files and caches
 /pcb/**/*.sch-bak
+/pcb/**/*.kicad_pcb-bak
 
 # Editor files
 tags
