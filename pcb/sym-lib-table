@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name air_quality_box)(type Legacy)(uri ${KIPRJMOD}/air_quality_box.lib)(options "")(descr ""))
+)
