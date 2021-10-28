@@ -10,6 +10,7 @@
 # PCB backup files and caches
 /pcb/**/*.sch-bak
 /pcb/**/*.kicad_pcb-bak
+/pcb/**/_autosave-*.kicad_pcb
 
 # Editor files
 tags
