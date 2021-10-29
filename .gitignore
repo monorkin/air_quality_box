@@ -7,10 +7,13 @@
 /firmware/**/platformio.ini
 /firmware/secrets.yaml
 
-# PCB backup files and caches
+# PCB backup files, caches and bundled build outputs
 /pcb/**/*.sch-bak
 /pcb/**/*.kicad_pcb-bak
 /pcb/**/_autosave-*.kicad_pcb
+/pcb/out/*.zip
+/pcb/out/*.tar
+/pcb/out/*.tar.gz
 
 # Editor files
 tags
