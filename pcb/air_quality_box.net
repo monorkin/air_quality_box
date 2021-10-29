@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/stanko/Projects/private/esp_home_air_quality_box/pcb/air_quality_box.sch)
-    (date "Thu 28 Oct 2021 10:58:46 AM CEST")
+    (date "Fri 29 Oct 2021 12:08:36 PM CEST")
     (tool "Eeschema 5.1.10")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -82,7 +82,14 @@
       (datasheet ~)
       (libsource (lib Device) (part CP1_Small) (description "Polarized capacitor, small US symbol"))
       (sheetpath (names /) (tstamps /))
-      (tstamp 617A1242)))
+      (tstamp 617A1242))
+    (comp (ref FID1)
+      (value Fiducial)
+      (footprint Symbol:OSHW-Logo2_7.3x6mm_SilkScreen)
+      (datasheet ~)
+      (libsource (lib Mechanical) (part Fiducial) (description "Fiducial Marker"))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 617FAB5D)))
   (libparts
     (libpart (lib Connector) (part Conn_01x05_Male)
       (description "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)")
@@ -153,6 +160,14 @@
       (pins
         (pin (num 1) (name ~) (type passive))
         (pin (num 2) (name ~) (type passive))))
+    (libpart (lib Mechanical) (part Fiducial)
+      (description "Fiducial Marker")
+      (docs ~)
+      (footprints
+        (fp Fiducial*))
+      (fields
+        (field (name Reference) FID)
+        (field (name Value) Fiducial)))
     (libpart (lib Switch) (part SW_SPDT)
       (description "Switch, single pole double throw")
       (docs ~)
@@ -217,6 +232,8 @@
       (uri /usr/share/kicad/library/Connector.lib))
     (library (logical Device)
       (uri /usr/share/kicad/library/Device.lib))
+    (library (logical Mechanical)
+      (uri /usr/share/kicad/library/Mechanical.lib))
     (library (logical Switch)
       (uri /usr/share/kicad/library/Switch.lib))
     (library (logical air_quality_box)
