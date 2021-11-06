@@ -66,9 +66,9 @@ display:
     width: 128
     height: 64
     dc_pin:
-      number: D8
-    cs_pin:
       number: D7
+    cs_pin:
+      number: D8
     reset_pin:
       number: D0
     # rotation: 180
@@ -151,7 +151,7 @@ display:
           }
       - id: part_matter_1um_page
         lambda: |-
-          it.print(0, 0, id(my_font), "Part. <1µm");
+          it.print(0, 0, id(my_font), "DUST <1µm");
           if (isnan(id(PM_1_0).state) || isnan(id(PMC_1_0).state)) {
             it.print(0, 20, id(my_font), "Gathering data...");
           }
@@ -171,7 +171,7 @@ display:
           }
       - id: part_matter_2_5um_page
         lambda: |-
-          it.print(0, 0, id(my_font), "Part. <2.5µm");
+          it.print(0, 0, id(my_font), "DUST <2.5µm");
           if (isnan(id(PM_2_5).state) || isnan(id(PMC_2_5).state)) {
             it.print(0, 20, id(my_font), "Gathering data...");
           }
@@ -191,7 +191,7 @@ display:
           }
       - id: part_matter_5um_page
         lambda: |-
-          it.print(0, 0, id(my_font), "Part. <4µm");
+          it.print(0, 0, id(my_font), "DUST <4µm");
           if (isnan(id(PM_4_0).state) || isnan(id(PMC_4_0).state)) {
             it.print(0, 20, id(my_font), "Gathering data...");
           }
@@ -211,7 +211,7 @@ display:
           }
       - id: part_matter_10um_page
         lambda: |-
-          it.print(0, 0, id(my_font), "Part. <10µm");
+          it.print(0, 0, id(my_font), "DUST <10µm");
           if (isnan(id(PM_10_0).state) || isnan(id(PMC_10_0).state)) {
             it.print(0, 20, id(my_font), "Gathering data...");
           }
@@ -235,49 +235,49 @@ graph:
     sensor: temp_sensor
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
   - id: humidity_graph
     sensor: humidity_sensor
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
   - id: pressure_graph
     sensor: pressure_sensor
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
   - id: co2_graph
     sensor: co2_sensor
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
   - id: pm_1_0_graph
     sensor: PM_1_0
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
   - id: pm_2_5_graph
     sensor: PM_2_5
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
   - id: pm_4_0_graph
     sensor: PM_4_0
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
   - id: pm_10_0_graph
     sensor: PM_10_0
     duration: 30min
     width: 128
-    height: 24
+    height: 22
     border: false
 
 interval:
